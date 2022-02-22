@@ -1,0 +1,15 @@
+.visiting-card{
+    background:hsl(137deg 99% 58% / 95%);
+    padding:10px;
+    font-family: "poppins", sans-serif;
+    width: 300px;
+}
+p{
+    margin:4px;
+}
+.company-name {
+    text-align: right;
+    font-family: "pacifico", cursive;
+    font-size: 24px;
+    font-weight: bold;
+}

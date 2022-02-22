@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div id="background">
+        <div id="hero"></div>
+        <div id="missiles"></div>
+        <div id="enemies"></div>
+    </div>
+
+    <script>
+        var enemies = [
+                       { left: 200, top: 100 },
+                       { left: 300, top: 100 },
+                       { left: 400, top: 100 },
+                       { left: 500, top: 100 },
+                       { left: 600, top: 100 },
+                       { left: 700, top: 100 },
+                       { left: 800, top: 100 },
+                       { left: 900, top: 100 },
+                       { left: 200, top: 175 },
+                       { left: 300, top: 175 },
+                       { left: 400, top: 175 },
+                       { left: 500, top: 175 },
+                       { left: 600, top: 175 },
+                       { left: 700, top: 175 },
+                       { left: 800, top: 175 },
+                       { left: 900, top: 175 }
+                      ];
+      let hero={
+          left:575,
+          top:700,
+      };
+
+      let missiles=[];
+
+      document.onkeydown = function(event){
+          if (event.keyCode === 37 && hero.left > 20){
+              hero.left = hero-10;
+          }
+      }
+
+          if (event.keyCode === 39 && hero.left < 1125){
+              hero.left = hero+10;
+          }
+
+          if (event.keyCode === 32){
+              missiles.push( { left:hero.left+20, top:hero.top-30});
+              drawmissiles();
+          }
+          drawHero();
+
+      function drawHero(){
+          document.getElementById("hero").style.left=hero.left + "px";
+          document.getElementById("hero").style.top=hero.top + "px";
+      }
+
+      function drawMissiles(){
+          document.getElementById("missiles").innerHTML="";
+          for(let missile of missiles){
+              document.getElementById("missiles").innerHTML+=`<div
+                      class="missile1"  style="left: ${missile.left};
+                                                top: ${missile.top};"></div>`;
+          }
+      }
+
+      function drawEnemies(){
+          document.getElementById("enemies").innerHTML="";
+          for(let enemy of enemies){
+              document.getElementById("enemies").innerHTML+=`<div
+                      class="enemy"  style="left: ${enemy.left};
+                                                top: ${enemy.top};"></div>`;
+          }
+      }
+      drawEnemies();
+
+      function moveEnemies(){
+          for(let enemy of enemies){
+              enemy.top = enemy.top+0.5;
+          }
+      }
+
+      function moveMissiles(){
+          for(let missile of missiles){
+              missile.top = missile.top-20;
+          }
+      }
+
+      function shooting(){
+          for(let enemyIdx in enemies){
+              for(let missile of missiles) {
+                  if( missiles[missileIdx].left >= enemies[enemyIdx].left &&
+                      missiles[missileIdx].left <= enemies[enemyIdx].left + 50 &&
+                      missiles[missileIdx].top >= enemies[enemyIdx].top &&
+                      missiles[missileIdx].top <= enemies[enemyIdx].top + 50 ) {
+                          enemies.splice(enemyIdx, 1);
+                          missiles.splice(missileIdx, 1);
+                      }
+              } 
+          }
+      }
+
+      const gamePlay = setInterval(function gameLoop() {
+
+          moveEnemies();
+          drawEnemies();
+          moveMisiles();
+          drawMissiles();
+          shooting();
+          gameEnd();
+      }, 1000/60);
+
+      function enemyChecker(){
+          return enemies.some((enemy)=>enemy.top >= hero.top-50);
+      }
+
+      function gameEnd(){
+          if(enemies.length===0){
+              clearInterval(gamePlay);
+              document.getElementById("background").innerHTML=`<div class="result">You won</div>`;
+              }
+              else if(enemyChecker()){
+                  clearInterval(gamePlay);
+                  document.getElementById("background").innerHTML=`<div class="result">Try Again</div>`;
+             }
+      }
+  </script>
+</body>
+
+</html>
+
+
+    
+    
+    

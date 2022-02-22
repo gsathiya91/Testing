@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Trail1(chr, strength) {
+  if (strength > 50) {
+    return chr + "🗡️";
+  } else {
+    throw Error(chr + "🐍");
+  }
+}
+
+function Trail2(chr, iq) {
+  if (iq > 90) {
+    return chr + "💰💍👑";
+  } else {
+    throw Error("💀");
+  }
+}
+
+const hero = (age, character) =>
+  new Promise((resolve, reject) => {
+    if (age > 18) {
+      resolve(character);
+    } else {
+      reject("👶 Try after few years");
+    }
+  });
+
+  function success(){
+
+     
+    hero(20,"😊")
+      .then(chr=>Trail1(chr,100))
+      .then(chrWithSword=>Trail2(chrWithSword,120))
+      .then(result=>console.log(result))
+      
+      hero(14,"😊")
+      .then(chr=>Trail1(chr,100))
+      .then(chr=>Trail2(chr,120))
+      .then(result=>console.log(result))
+      .catch(errmsg=>console.log("🙄"+errmsg))
+  }
+ success();
+    </script>
+</body>
+</html>

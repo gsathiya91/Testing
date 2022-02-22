@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .btn{
+        font-size: 2rem;
+        background:red;
+        color:white;
+    }
+    body{
+        height:100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+            
+    }
+    .switch-input{
+        height:10px;
+        width:10px;
+    }
+</style>
+<body>
+    <button class="btn" onclick="togglecyclecolors()">Toggle color cycle</button>
+    <!-- <button class="btn" onclick="stop()">Stop color cycle</button> -->
+    <!-- <button class="btn">Toggle</button> -->
+    <script>
+
+        let cyclecolors;
+        let index=0;
+                   
+        function start(){
+            const colors=["crimson","skyblue","teal","orange","green","purple"];
+            cyclecolors=window.setInterval(()=>{
+                if(index===colors.length){
+                    index=0;
+                }
+                document.body.style.background=colors[index];
+                index++;           
+                 }, 2 * 1000)
+        }
+
+        function stop(){
+            clearInterval(cyclecolors);
+        }
+
+        let cycleSwitch="OFF"
+        function togglecyclecolors(){
+            if(cycleSwitch==="OFF"){
+                start();
+                cycleSwitch="ON";
+            }else{
+                stop();
+                cycleSwitch="OFF";
+            }
+        }
+    </script>
+</body>
+</html>

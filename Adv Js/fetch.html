@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Api's</title>
+</head>
+
+<body>
+    <script>
+        // display 250 countries data
+
+        // fetch("https://restcountries.com/v3.1/all")
+        // .then((data)=>data.json())
+        // .then((countries)=>console.log(countries));
+
+        // Display country name which has population morethan 1cr
+
+        // underscore is Es-6 feature instead of comma we cant use comma in js
+
+        // .then((data)=>data.json())
+        // .then((countries)=>countries.filter(country=>country.population > 1_00_00_000))
+        // .then((countries)=>countries.map(country=>country.name.official))
+        // .then((result)=>console.log(result))
+
+        //  Display  country names who speaks spanish
+
+        //    .then((countries)=>countries.filter((ctry)=>ctry.languages && ctry.languages.spa))
+        //    .then((result)=>console.log(result));
+
+        //    ?.=>optional chaining
+
+        //    .then((countries)=>countries.filter((ctry)=>ctry.languages?.spa))
+        //    .then((result)=>console.log(result));
+
+        // Display country details with flag
+            function createCountry(){
+        fetch("https://restcountries.com/v3.1/all")
+            .then((data) => data.json())
+            .then((countries) => {
+                countries.forEach((country) => {
+                    const countryAdapter = {
+                        name: country.name.official,
+                        flag: country.flags.svg,
+                        population: country.population,
+                        region: country.region,
+                        capital: country.capital,
+                    };
+             
+                    createCountry(countryAdapter);
+                });
+            
+            });
+
+
+            
+    </script>
+</body>
+
+</html>
